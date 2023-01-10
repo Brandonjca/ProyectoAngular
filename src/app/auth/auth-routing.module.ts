@@ -4,6 +4,8 @@ import { RegisterComponent } from './register/register.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth.component';
 
+
+//Rutas
 const routes: Routes = [
   {path: '', component:AuthComponent},
   //AUTH
