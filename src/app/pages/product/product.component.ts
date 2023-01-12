@@ -35,7 +35,7 @@ export class ProductComponent {
       title:"Zapatos",
       price:20,
       description:"deportivos / Brandon Caranqui",
-      images:["https://sdfsdgsdhasjh"],
+      images:["https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?w=800"],
       categoryId:1
     }
     const url = "https://api.escuelajs.co/api/v1/products";
@@ -50,10 +50,10 @@ export class ProductComponent {
       title:"camisas",
       price:25,
       description:"ropa deportiva / Brandon Caranqui",
-      images:["https://sdfsdgsdhasjh"],
+      images:["https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?w=800"],
       categoryId:1
     }
-    const url = "https://api.escuelajs.co/api/v1/products/226";
+    const url = "https://api.escuelajs.co/api/v1/products/213";
     this.httpClient.put(url, data).subscribe(
       response => {console.log(response);
       }
