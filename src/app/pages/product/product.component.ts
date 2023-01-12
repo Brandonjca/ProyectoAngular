@@ -12,8 +12,9 @@ export class ProductComponent {
   ngOnInit(): void{
     //this.getProducts();
     //this.getProduct();
-    this.createProduct();
+    //this.createProduct();
     //this.updateProduct();
+    this.deleteProduct();
   }
 
   getProducts():void{
@@ -60,4 +61,9 @@ export class ProductComponent {
     );
   }
 
+  deleteProduct(){
+    const url = "https://api.escuelajs.co/api/v1/products/202";
+    this.httpClient.delete(url).subscribe
+    (response => {console.log(response);});
+  }
 }
