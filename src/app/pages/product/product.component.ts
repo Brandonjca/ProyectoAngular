@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient as HttpClient} from '@angular/common/http';
+import {productHttpService as productHttpService} from '@angular/common/http';
+import { ProductHttpServicesService } from '../../services/product-http-services.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product',
@@ -7,7 +9,7 @@ import {HttpClient as HttpClient} from '@angular/common/http';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private productHttpService: ProductHttpServicesService) {}
 
   ngOnInit(): void{
     //this.getProducts();
@@ -19,14 +21,14 @@ export class ProductComponent {
 
   getProducts():void{
     const url ="https://api.escuelajs.co/api/v1/products";
-    const response = this.httpClient.get(url).subscribe
+    const response = this.productHttpService.getAll().subscribe
     (response => {console.log(response);
     });
   }
 
   getProduct(){
     const url ="https://api.escuelajs.co/api/v1/products/20";
-    const response = this.httpClient.get(url).subscribe
+    const response = this.productHttpService.getOne(2).subscribe
     (response => {console.log(response);
     });
   }
@@ -40,7 +42,7 @@ export class ProductComponent {
       categoryId:1
     }
     const url = "https://api.escuelajs.co/api/v1/products";
-    this.httpClient.post(url, data).subscribe(
+    this.productHttpService.store(url, product:productHttpService).subscribe(
       response => {console.log(response);
       }
     );
@@ -55,7 +57,7 @@ export class ProductComponent {
       categoryId:1
     }
     const url = "https://api.escuelajs.co/api/v1/products/213";
-    this.httpClient.put(url, data).subscribe(
+    this.productHttpService.update(url, data).subscribe(
       response => {console.log(response);
       }
     );
@@ -63,7 +65,7 @@ export class ProductComponent {
 
   deleteProduct(){
     const url = "https://api.escuelajs.co/api/v1/products/202";
-    this.httpClient.delete(url).subscribe
+    this.productHttpService.destroy(url).subscribe
     (response => {console.log(response);});
   }
 }
