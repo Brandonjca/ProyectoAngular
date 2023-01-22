@@ -41,7 +41,7 @@ export class ProductComponent implements OnInit {
     const data = {
       title: "Zapatos",
       price: 25,
-      description: "Deportivos / Leonel Sangolquiza",
+      description: "Deportivos / Brandon Caranqui",
       images: ['https://m.media-amazon.com/images/I/41lL4RYD-PL._SL500_.jpg'],
       categoryId: 1,
     }
