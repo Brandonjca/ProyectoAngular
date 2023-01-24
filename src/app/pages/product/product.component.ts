@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient as HttpClient} from '@angular/common/http';
 import { ProductHttpServiceService } from 'src/app/services/product-http-services.service';
+import { ProductModel } from 'src/app/entities/product.model';
+import { UpdateProductModel } from '../../entities/product.model';
 
 @Component({
   selector: 'app-product',
@@ -9,23 +11,28 @@ import { ProductHttpServiceService } from 'src/app/services/product-http-service
 })
 export class ProductComponent implements OnInit {
   httpClient: any;
+  products: ProductModel [] = [];
+  selectedProduct: UpdateProductModel = {title: '', price: 0, description:''};
   constructor(private productHttpService: ProductHttpServiceService) {
+  }
 
+  initProduct(){
+    this.selectedProduct = {title: '', price: 0, description:''};
   }
 
   ngOnInit(): void {
-    //this.getProducts();
+    this.getProducts();
     //this.getProduct();
     //this.createProduct();
     //this.updateProduct();
     //this.deleteProduct();
   }
 
-  getProducts(): void {
-    const url = 'http://api.escuelajs.co/api/v1/products';
+  getProducts() {
     this.productHttpService.getAll().subscribe
       (response => {
-        console.log(response)
+        this.products = response;
+        //console.log(response)
       });
   }
 
@@ -52,7 +59,7 @@ export class ProductComponent implements OnInit {
       });
   }
 
-  updateProduct() {
+  updateProduct(id:ProductModel['id']) {
     const data = {
       title: "Camisetas",
       price: 15,
@@ -66,12 +73,15 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  deleteProduct() {
-    const url = "https://api.escuelajs.co/api/v1/products/192";
-    this.productHttpService.destroy(61).subscribe(
+  deleteProduct(id:ProductModel['id']) {
+    this.productHttpService.destroy(id).subscribe(
       response => {
-        console.log(response);
+        this.products = this.products.filter(product => product.id != id);
       }
     );
+  }
+
+  editProduct(product:ProductModel){
+    this.selectedProduct = product;
   }
 }
